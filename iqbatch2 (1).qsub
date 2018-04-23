@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#PBS -N iqtreeLUCA_array
+
+#PBS -l nodes=1:ppn=16,walltime=216:00:00
+#PBS -nt AUTO
+
+#PBS -t 101-200
+
+cd $PBS_O_WORKDIR
+echo "The Array ID is: ${PBS_ARRAYID}"
+
+module load /cm/shared/modulefiles/apps/iqtree-1.6.3
+
+
+###cd /panfs/panasas01/bisc/em16077/iqtree/data
+
+###specify your command line, including full paths (if not using a module, need to include the path to the executable):
+
+
+time iqtree -s ${PBS_ARRAYID}_*.phy -m MFP -madd LG+C20,LG+C30,LG+C40,LG+C50,LG+C60 -bb 1000 -bnni -wbtl
